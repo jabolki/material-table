@@ -89,6 +89,10 @@ export class MTableToolbar extends React.Component {
       const orientation = "landscape";
 
       const doc = new jsPDF(orientation, unit, size);
+      if(this.props.exportFontName) {
+        console.log(`JsPdf export using custom font: ${this.props.exportFontName}`);
+        doc.setFont(this.props.exportFontName);
+      }
       doc.setFontSize(15);
       doc.text(this.props.exportFileName || this.props.title, 40, 40);
       doc.autoTable(content);
@@ -111,6 +115,7 @@ export class MTableToolbar extends React.Component {
     if (this.props.exportPdf) {
       this.props.exportPdf(this.props.columns, this.props.data);
     } else {
+      console.log(this.props);
       this.defaultExportPdf();
     }
     this.setState({ exportButtonAnchorEl: null });
@@ -127,7 +132,7 @@ export class MTableToolbar extends React.Component {
           autoFocus={this.props.searchAutoFocus}
           className={
             this.props.searchFieldAlignment === "left" &&
-            this.props.showTitle === false
+              this.props.showTitle === false
               ? null
               : this.props.classes.searchField
           }
@@ -258,16 +263,16 @@ export class MTableToolbar extends React.Component {
             >
               {(this.props.exportButton === true ||
                 this.props.exportButton.csv) && (
-                <MenuItem key="export-csv" onClick={this.exportCsv}>
-                  {localization.exportCSVName}
-                </MenuItem>
-              )}
+                  <MenuItem key="export-csv" onClick={this.exportCsv}>
+                    {localization.exportCSVName}
+                  </MenuItem>
+                )}
               {(this.props.exportButton === true ||
                 this.props.exportButton.pdf) && (
-                <MenuItem key="export-pdf" onClick={this.exportPdf}>
-                  {localization.exportPDFName}
-                </MenuItem>
-              )}
+                  <MenuItem key="export-pdf" onClick={this.exportPdf}>
+                    {localization.exportPDFName}
+                  </MenuItem>
+                )}
             </Menu>
           </span>
         )}
@@ -327,8 +332,8 @@ export class MTableToolbar extends React.Component {
           {title}
         </Typography>
       ) : (
-        title
-      );
+          title
+        );
 
     return <div className={classes.title}>{toolBarTitle}</div>;
   }
@@ -341,17 +346,17 @@ export class MTableToolbar extends React.Component {
     };
     const title =
       this.props.showTextRowsSelected &&
-      this.props.selectedRows &&
-      this.props.selectedRows.length > 0
+        this.props.selectedRows &&
+        this.props.selectedRows.length > 0
         ? typeof localization.nRowsSelected === "function"
           ? localization.nRowsSelected(this.props.selectedRows.length)
           : localization.nRowsSelected.replace(
-              "{0}",
-              this.props.selectedRows.length
-            )
+            "{0}",
+            this.props.selectedRows.length
+          )
         : this.props.showTitle
-        ? this.props.title
-        : null;
+          ? this.props.title
+          : null;
     return (
       <Toolbar
         className={classNames(classes.root, {
@@ -430,6 +435,7 @@ MTableToolbar.propTypes = {
     PropTypes.shape({ csv: PropTypes.bool, pdf: PropTypes.bool }),
   ]),
   exportDelimiter: PropTypes.string,
+  exportFontName: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   exportFileName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   exportCsv: PropTypes.func,
   exportPdf: PropTypes.func,
@@ -444,13 +450,13 @@ export const styles = (theme) => ({
   highlight:
     theme.palette.type === "light"
       ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
+        color: theme.palette.secondary.main,
+        backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+      }
       : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
+        color: theme.palette.text.primary,
+        backgroundColor: theme.palette.secondary.dark,
+      },
   spacer: {
     flex: "1 1 10%",
   },

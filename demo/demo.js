@@ -4,6 +4,8 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import MaterialTable from "../src";
 import Typography from "@material-ui/core/Typography";
+import { } from "./Roboto-Medium-normal";
+import { } from "./Helvetica_400-normal";
 
 let direction = "ltr";
 // direction = 'rtl';
@@ -478,10 +480,55 @@ class App extends Component {
       <>
         <MuiThemeProvider theme={theme}>
           <div style={{ maxWidth: "100%", direction }}>
+            <MaterialTable
+              title="Кирилица пример Roboto"
+              columns={[
+                { title: 'Име', field: 'name', export: false },
+                { title: 'Презиме', field: 'surname' },
+                { title: 'Роденден', field: 'birthYear', type: 'numeric' },
+                {
+                  title: 'Роденден',
+                  field: 'birthCity',
+                  lookup: { 34: 'Скопје', 63: 'Кичево' },
+                },
+              ]}
+              data={[
+                { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
+                { name: 'Zerya Betül', surname: 'Baran', birthYear: 2017, birthCity: 34 },
+              ]}
+              options={{
+                exportButton: true,
+                exportFontName: "Roboto-Medium"
+              }}
+            />
+
+            <MaterialTable
+              style={{ fontFamily: "Roboto, sans-serif" }}
+              title="Кирилица пример Helvetica"
+              columns={[
+                { title: 'Име', field: 'name', export: false },
+                { title: 'Презиме', field: 'surname' },
+                { title: 'Роденден', field: 'birthYear', type: 'numeric' },
+                {
+                  title: 'Роденден',
+                  field: 'birthCity',
+                  lookup: { 34: 'Скопје', 63: 'Кичево' },
+                },
+              ]}
+              data={[
+                { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
+                { name: 'Zerya Betül', surname: 'Baran', birthYear: 2017, birthCity: 34 },
+              ]}
+              options={{
+                exportButton: true,
+                exportFontName: "Helvetica 400"
+              }}
+            />
             <Grid container>
               <Grid item xs={12}>
                 {this.state.selectedRows && this.state.selectedRows.length}
                 <MaterialTable
+                  options={{ exportButton: true }}
                   tableRef={this.tableRef}
                   columns={this.state.columns}
                   data={this.state.data}
@@ -583,7 +630,7 @@ class App extends Component {
                       "Dropped column from " + oldPos + " to position " + newPos
                     )
                   }
-                  // parentChildData={(row, rows) => rows.find(a => a.id === row.parentId)}
+                // parentChildData={(row, rows) => rows.find(a => a.id === row.parentId)}
                 />
               </Grid>
             </Grid>
@@ -594,7 +641,7 @@ class App extends Component {
             >
               Select
             </button>
-            {/* <MaterialTable
+            <MaterialTable options={{ exportButton: true }}
               title={
                 <Typography variant="h6" color="primary">
                   Remote Data Preview
@@ -662,7 +709,7 @@ class App extends Component {
                     });
                 })
               }
-            /> */}
+            />
           </div>
         </MuiThemeProvider>
       </>
