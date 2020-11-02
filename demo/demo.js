@@ -498,7 +498,11 @@ class App extends Component {
               ]}
               options={{
                 exportButton: true,
-                exportFontName: "Roboto-Medium"
+                exportFontName: "Roboto-Medium",
+                exportFontOptions: {
+                  styles: { fontStyle: 'normal' },
+                  headStyles: { fontStyle: 'normal' }
+                }
               }}
             />
 

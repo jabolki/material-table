@@ -314,7 +314,7 @@ export const propTypes = {
     ]),
     exportDelimiter: PropTypes.string,
     exportFontName: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-    exportFileName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    exportFontOptions: PropTypes.object,
     exportCsv: PropTypes.func,
     filtering: PropTypes.bool,
     filterCellStyle: PropTypes.object,

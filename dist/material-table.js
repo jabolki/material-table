@@ -928,6 +928,7 @@ var MaterialTable = /*#__PURE__*/function (_React$Component) {
         exportAllData: props.options.exportAllData,
         exportButton: props.options.exportButton,
         exportFontName: props.options.exportFontName,
+        exportFontOptions: props.options.exportFontOptions,
         exportDelimiter: props.options.exportDelimiter,
         exportFileName: props.options.exportFileName,
         exportCsv: props.options.exportCsv,

@@ -418,7 +418,7 @@ MTableToolbar.propTypes = {
   })]),
   exportDelimiter: _propTypes["default"].string,
   exportFontName: _propTypes["default"].oneOfType([_propTypes["default"].string, _propTypes["default"].bool]),
-  exportFileName: _propTypes["default"].oneOfType([_propTypes["default"].string, _propTypes["default"].func]),
+  exportFontOptions: _propTypes["default"].object,
   exportCsv: _propTypes["default"].func,
   exportPdf: _propTypes["default"].func,
   classes: _propTypes["default"].object,

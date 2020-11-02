@@ -78,11 +78,14 @@ export class MTableToolbar extends React.Component {
     if (jsPDF !== null) {
       const [columns, data] = this.getTableData();
 
-      let content = {
+      
+      var content = {
         startY: 50,
-        head: [columns.map((columnDef) => columnDef.title)],
-        body: data,
-      };
+        head: [columns.map(function (columnDef) {
+          return columnDef.title;
+        })],
+        body: data
+      };      
 
       const unit = "pt";
       const size = "A4";
@@ -90,11 +93,17 @@ export class MTableToolbar extends React.Component {
 
       const doc = new jsPDF(orientation, unit, size);
       if(this.props.exportFontName) {
-        console.log(`JsPdf export using custom font: ${this.props.exportFontName}`);
-        doc.setFont(this.props.exportFontName);
+        let fontName = this.props.exportFontName
+        console.log(`JsPdf export using custom font: ${fontName}`);
+
+        for (const [key, value] of Object.entries(this.props.exportFontOptions || {})) {
+          content[key] = {...{ font: fontName }, ...value}
+        }
+        doc.setFont(fontName);
       }
       doc.setFontSize(15);
       doc.text(this.props.exportFileName || this.props.title, 40, 40);
+      console.log(content);
       doc.autoTable(content);
       doc.save(
         (this.props.exportFileName || this.props.title || "data") + ".pdf"
