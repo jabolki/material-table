@@ -136,8 +136,20 @@ var MTableToolbar = /*#__PURE__*/function (_React$Component) {
         var doc = new jsPDF(orientation, unit, size);
 
         if (_this.props.exportFontName) {
-          console.log("JsPdf export using custom font: ".concat(_this.props.exportFontName));
-          doc.setFont(_this.props.exportFontName);
+          var fontName = _this.props.exportFontName;
+          console.log("JsPdf export using custom font: ".concat(fontName));
+
+          for (var _i = 0, _Object$entries = Object.entries(_this.props.exportFontOptions || {}); _i < _Object$entries.length; _i++) {
+            var _Object$entries$_i = (0, _slicedToArray2["default"])(_Object$entries[_i], 2),
+                key = _Object$entries$_i[0],
+                value = _Object$entries$_i[1];
+
+            content[key] = (0, _objectSpread2["default"])({}, {
+              font: fontName
+            }, value);
+          }
+
+          doc.setFont(fontName);
         }
 
         doc.setFontSize(15);
@@ -418,7 +430,7 @@ MTableToolbar.propTypes = {
   })]),
   exportDelimiter: _propTypes["default"].string,
   exportFontName: _propTypes["default"].oneOfType([_propTypes["default"].string, _propTypes["default"].bool]),
-  exportFontOptions: _propTypes["default"].object,
+  exportFileName: _propTypes["default"].oneOfType([_propTypes["default"].string, _propTypes["default"].func]),
   exportCsv: _propTypes["default"].func,
   exportPdf: _propTypes["default"].func,
   classes: _propTypes["default"].object,

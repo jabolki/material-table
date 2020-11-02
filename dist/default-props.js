@@ -231,6 +231,7 @@ var defaultProps = {
     exportAllData: false,
     exportButton: false,
     exportFontName: false,
+    exportFontOptions: {},
     exportDelimiter: ",",
     filtering: false,
     groupTitle: false,

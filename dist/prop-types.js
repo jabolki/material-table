@@ -142,7 +142,6 @@ var propTypes = {
     exportDelimiter: _propTypes["default"].string,
     exportFontName: _propTypes["default"].oneOfType([_propTypes["default"].string, _propTypes["default"].bool]),
     exportFontOptions: _propTypes["default"].object,
-    exportFileName: _propTypes["default"].oneOfType([_propTypes["default"].string, _propTypes["default"].func]),
     exportCsv: _propTypes["default"].func,
     filtering: _propTypes["default"].bool,
     filterCellStyle: _propTypes["default"].object,
