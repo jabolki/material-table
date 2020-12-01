@@ -132,7 +132,7 @@ var MTableToolbar = /*#__PURE__*/function (_React$Component) {
         };
         var unit = "pt";
         var size = "A4";
-        var orientation = "landscape";
+        var orientation = "portrait";
         var doc = new jsPDF(orientation, unit, size);
 
         if (_this.props.exportFontName) {

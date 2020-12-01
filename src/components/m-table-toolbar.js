@@ -89,7 +89,7 @@ export class MTableToolbar extends React.Component {
 
       const unit = "pt";
       const size = "A4";
-      const orientation = "landscape";
+      const orientation = "portrait";
 
       const doc = new jsPDF(orientation, unit, size);
       if(this.props.exportFontName) {
