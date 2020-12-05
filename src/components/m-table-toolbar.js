@@ -80,28 +80,30 @@ export class MTableToolbar extends React.Component {
 
       
       var content = {
-        startY: 50,
+        startY: 10,
         head: [columns.map(function (columnDef) {
           return columnDef.title;
         })],
-        body: data
+        body: data,
+        margin: 10,
       };      
 
       const unit = "pt";
       const size = "A4";
-      const orientation = "portrait";
+      const orientation = this.props.exportOrientation  ? this.props.exportOrientation : "portrait";
 
       const doc = new jsPDF(orientation, unit, size);
       if(this.props.exportFontName) {
         let fontName = this.props.exportFontName
-        console.log(`JsPdf export using custom font: ${fontName}`);
+        console.log(`jsPDF export using custom font: ${fontName}`);
 
         for (const [key, value] of Object.entries(this.props.exportFontOptions || {})) {
           content[key] = {...{ font: fontName }, ...value}
         }
         doc.setFont(fontName);
       }
-      doc.setFontSize(15);
+      doc.setFontSize(this.props.exportFontSize);
+      console.log("export font size: "+this.props.exportFontSize)
       doc.text(this.props.exportFileName || this.props.title, 40, 40);
       doc.autoTable(content);
       doc.save(
@@ -444,6 +446,9 @@ MTableToolbar.propTypes = {
   ]),
   exportDelimiter: PropTypes.string,
   exportFontName: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  exportFontSize: PropTypes.number,
+  exportFontOptions: PropTypes.object,
+  exportOrientation: PropTypes.string,
   exportFileName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   exportCsv: PropTypes.func,
   exportPdf: PropTypes.func,
